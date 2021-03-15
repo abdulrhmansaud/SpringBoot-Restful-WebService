@@ -46,6 +46,7 @@ public class TodoService {
 
     public Todo update(String id, Todo todo) {
         Todo updated = getById(id);
+
         updated.setId(todo.getId());
         updated.setTitle(todo.getTitle());
         updated.setDescription(todo.getDescription());

@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = " ")
+@RequestMapping(value = "api/v1/")
 public class TodoController extends BaseCotroller {
 
     @Autowired
     private TodoService todoService;
 
 
-    @GetMapping(value = { "", "/" })
+    @GetMapping()
     public ResponseEntity<List<Todo>> listTodo() {
         List<Todo> result = todoService.findByuserId(getCurrentUser().getId());
         return new ResponseEntity<>(result, HttpStatus.OK);
@@ -33,7 +33,7 @@ public class TodoController extends BaseCotroller {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    @PostMapping(value = { "", "/" })
+    @PostMapping
     public ResponseEntity<Todo> CreateNewTodo(@RequestBody Todo todo) {
         todo.setUserId(getCurrentUser().getId());
         Todo result = todoService.save(todo);
@@ -41,7 +41,7 @@ public class TodoController extends BaseCotroller {
         return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
 
-    @PutMapping(value = { "/{id}" })
+    @PutMapping("/{id}")
     public ResponseEntity<Todo> update(@PathVariable String id, @RequestBody Todo todo) {
         todo.setUserId(getCurrentUser().getId());
         Todo result = todoService.update(id,todo);
